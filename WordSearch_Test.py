@@ -8,7 +8,7 @@
 import pytest
 from typing import List
 import WordSearch_Functions as wsFunc
-from WordSearch_Classes import WordSearchResult
+from WordSearch_Classes import WordSearchResult, WordSearch, InvalidWordSearchFile
 
 """
 #######################################################################################
@@ -29,6 +29,32 @@ class TestWordSearchResult:
         testOutLine: str = testResult.createOutputLine(2)
 
         assert testOutLine in "Test (2, 2) (5, 5)"
+
+"""
+#######################################################################################
+# WORD SEARCH CLASS TESTS
+#######################################################################################
+"""
+class TestWordSearch:
+    #Test that the function can correctly read the small test file
+    def test_readSmallTestFile(self):
+        testSearch: WordSearch = WordSearch("TestFiles/3x8_TestSearch.txt")
+
+        correctWords: bool = (len(testSearch.words) == 2)
+        correctHoris: bool = (len(testSearch.horizontalLines) == 3 and len(testSearch.horizontalLines[0]) == 8)
+        correctVerts: bool = (len(testSearch.verticalLines) == 8 and len(testSearch.verticalLines[0]) == 3)
+
+        assert (correctWords and correctHoris and correctVerts)
+
+    #Test that the function can correctly read the larger test file
+    def test_readLargeTestFile(self):
+        testSearch: WordSearch = WordSearch("TestFiles/5x10_TestSearch.txt")
+
+        correctWords: bool = (len(testSearch.words) == 5)
+        correctHoris: bool = (len(testSearch.horizontalLines) == 5 and len(testSearch.horizontalLines[0]) == 10)
+        correctVerts: bool = (len(testSearch.verticalLines) == 10 and len(testSearch.verticalLines[0]) == 5)
+
+        assert (correctWords and correctHoris and correctVerts)
 
 """
 #######################################################################################
