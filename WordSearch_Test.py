@@ -22,14 +22,14 @@ class TestWordSearchResult:
         testResult: WordSearchResult = WordSearchResult("Test", (0, 0), (3, 3))
         testOutLine: str = testResult.createOutputLine()
 
-        assert testOutLine in "Test (0, 0) (3, 3)"
+        assert testOutLine in "TEST (0, 0) (3, 3)"
 
     #Test that the offset argument of the output line generation works correctly
     def test_outputLineGenerationWithOffset(self):
         testResult: WordSearchResult = WordSearchResult("Test", (0, 0), (3, 3))
         testOutLine: str = testResult.createOutputLine(2)
 
-        assert testOutLine in "Test (2, 2) (5, 5)"
+        assert testOutLine in "TEST (2, 2) (5, 5)"
 
 """
 #######################################################################################

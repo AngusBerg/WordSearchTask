@@ -33,7 +33,7 @@ class WordSearchResult:
     def createOutputLine(self, offset: int = 0) -> str:
         startPart = "(" + str(self.startX + offset) + ", " + str(self.startX + offset) + ")"
         endPart = "(" + str(self.endX + offset) + ", " + str(self.endY + offset) + ")"
-        return self.word + " " + startPart + " " + endPart
+        return self.word.upper() + " " + startPart + " " + endPart
 
 """
 #######################################################################

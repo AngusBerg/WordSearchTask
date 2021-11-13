@@ -5,6 +5,7 @@
 # Date Created:     12/11/2021
 ########################################################################################################################
 """
+from pathlib import Path
 from typing import List, Tuple, Dict
 from WordSearch_Classes import WordSearchResult, WordSearch
 
@@ -101,7 +102,46 @@ def runLoadedWordSearch(wordSearch: WordSearch) -> Dict[str, List[WordSearchResu
     #Return the dictionary with the relevant entries
     return outputDict
 
+"""
+########################################################################################################################
+FUNCTION TO WRITE THE RESULTS OF OF THE WORD SEARCH PROCESS TO FILE
+"""
+def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[str, List[WordSearchResult]]):
+    #Run through the words in the list, adding their results to the output content string
+    outputContent: str = ""
 
+    for word in wordList:
+        #Pull the content if it exists and convert to the output string
+        try:
+            currentResult = results[word][0].createOutputLine(1)
+        except (KeyError, IndexError):
+            currentResult = word.upper() + " not found"
+
+        #Add the entry to the output string
+        outputContent += currentResult
+
+    #Check that the output path doesn't lead to a pre-existing file
+    if Path(outputPath).is_file():
+        #Add an offset to ensure that the file path isn't filled
+        count: int = 1
+
+        while True:
+            pathParts: List[str] = outputPath.split(".")
+            offsetPath: str = ".".join(pathParts[:-1]) + "_" + str(count) + "." + pathParts[-1]
+
+            #See if the offset path is unique. If not, increment the count and loop
+            if Path(offsetPath).is_file():
+                count += 1
+            else:
+                outputPath = offsetPath
+                break
+
+    #Write the information out to file
+    with open(outputPath, "w") as file:
+        file.write(outputContent)
+
+    #Return from writing to file
+    return
 
 
 
