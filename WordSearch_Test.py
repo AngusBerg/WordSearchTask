@@ -12,6 +12,26 @@ from WordSearch_Classes import WordSearchResult
 
 """
 #######################################################################################
+# WORD SEARCH RESULTS CLASS TESTS
+#######################################################################################
+"""
+class TestWordSearchResult:
+    #Test that the output line generation function works correctly
+    def test_outputLineGeneration(self):
+        testResult: WordSearchResult = WordSearchResult("Test", (0, 0), (3, 3))
+        testOutLine: str = testResult.createOutputLine()
+
+        assert testOutLine in "Test (0, 0) (3, 3)"
+
+    #Test that the offset argument of the output line generation works correctly
+    def test_outputLineGenerationWithOffset(self):
+        testResult: WordSearchResult = WordSearchResult("Test", (0, 0), (3, 3))
+        testOutLine: str = testResult.createOutputLine(2)
+
+        assert testOutLine in "Test (2, 2) (5, 5)"
+
+"""
+#######################################################################################
 # FIND WORDS IN STRING FUNCTION TESTS
 #######################################################################################
 """
