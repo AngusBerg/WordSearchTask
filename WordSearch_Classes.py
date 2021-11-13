@@ -22,7 +22,7 @@ class WordSearchResult:
         self.endY: int = endPosition[1]
 
     #Function to convert the contents of the results class into the output line for the results file
-    def createOutputLine(self) -> str:
-        startPart = "(" + str(self.startX) + ", " + str(self.startX) + ")"
-        endPart = "(" + str(self.endX) + ", " + str(self.endY) + ")"
+    def createOutputLine(self, offset: int = 0) -> str:
+        startPart = "(" + str(self.startX + offset) + ", " + str(self.startX + offset) + ")"
+        endPart = "(" + str(self.endX + offset) + ", " + str(self.endY + offset) + ")"
         return self.word + " " + startPart + " " + endPart
