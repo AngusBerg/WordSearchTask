@@ -60,3 +60,42 @@ def extractAllInstancesInLine(word: str, line: str, lineNum: int, vertical: bool
         return [WordSearchResult(lowerWord.capitalize(), (lineNum, yy[0]), (lineNum, yy[1])) for yy in searchResults]
     else:
         return [WordSearchResult(lowerWord.capitalize(), (xx[0], lineNum), (xx[1], lineNum)) for xx in searchResults]
+
+"""
+########################################################################################################################
+FUNCTION TO FIND ALL THE INSTANCES OF A WORD ON ALL LINES AND RETURN THE LIST OF RESULTS
+- word: The word that will be searched for in the lines
+- horizontalLines: The set of horizontal lines that will be searched for instances of the word
+- verticalLines: The set of vertical lines that will be searched for instances of the word
+"""
+def extractInstancesAcrossAllLines(word: str, horizontalLines: List[str], verticalLines: List[str]) \
+        -> List[WordSearchResult]:
+    #Get the results for the horizontal lines
+    extractionResults: List[WordSearchResult] = []
+    for index, line in enumerate(horizontalLines):
+        extractionResults.extend(extractAllInstancesInLine(word, line, index, False))
+
+    #Get the results for the vertical lines
+    for index, line in enumerate(verticalLines):
+        extractionResults.extend(extractAllInstancesInLine(word, line, index, True))
+
+    #Return the full list of results that have been extracted
+    return extractionResults
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

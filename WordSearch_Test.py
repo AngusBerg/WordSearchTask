@@ -80,7 +80,52 @@ class TestExtractAllInstancesInLine:
         testResult: List[WordSearchResult] = wsFunc.extractAllInstancesInLine("unmatched", "<>?@#&!^#*!#)(", 0, False)
         assert len(testResult) == 0
 
+"""
+#######################################################################################
+# FIND ALL INSTANCES ACROSS GIVEN LINES FUNCTION TESTS
+#######################################################################################
+"""
+class TestExtractInstancesAcrossAllLines:
+    #Test that the function pulls can pull an instance from every line
+    def test_simpleExtractAllLinesSimple(self):
+        testLines: List[str] = ["match", "match", "match", "match", "match"]
+        testResults: List[WordSearchResult] = wsFunc.extractInstancesAcrossAllLines("match", testLines, testLines)
 
+        assert len(testResults) == (2 * len(testLines))
+
+    #Test that the function pulls the correct number of instances when there are different numbers of results on lines
+    def test_simpleExtractAllLinesMixed(self):
+        testLines: List[str] = ["catcatdog", "dogdogcat", "catcatcat", "dogdogdog", "winnebago"]
+        testResults: List[WordSearchResult] = wsFunc.extractInstancesAcrossAllLines("dog", testLines, testLines)
+
+        assert len(testResults) == 12
+
+    #Test that the function returns an empty list when there are no matching results
+    def test_noInstancesOnAnyLine(self):
+        testLines: List[str] = ["hello", "this", "is", "a", "unit", "test"]
+        testResults: List[WordSearchResult] = wsFunc.extractInstancesAcrossAllLines("unfound", testLines, testLines)
+
+        assert len(testResults) == 0
+
+    #Test that the function runs correctly when no vertical lines are provided
+    def test_noVerticalLinesProvided(self):
+        testLines: List[str] = ["alphabet", "alphabet", "alphabet", "alphabet", "alphabet"]
+        testResults: List[WordSearchResult] = wsFunc.extractInstancesAcrossAllLines("alpha", testLines, [])
+
+        assert len(testResults) == 5
+
+    #Test that the function runs correctly when no horizontal lines are provided
+    def test_noHorizontalLinesProvided(self):
+        testLines: List[str] = ["alphabet", "alphabet", "alphabet", "alphabet", "alphabet"]
+        testResults: List[WordSearchResult] = wsFunc.extractInstancesAcrossAllLines("alpha", [], testLines)
+
+        assert len(testResults) == 5
+
+    #Test that the function runs correctly when no lines are provided at all
+    def test_noLinesProvided(self):
+        testResults: List[WordSearchResult] = wsFunc.extractInstancesAcrossAllLines("alpha", [], [])
+
+        assert len(testResults) == 0
 
 
 
