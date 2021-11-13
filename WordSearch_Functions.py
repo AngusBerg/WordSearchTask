@@ -58,9 +58,9 @@ def extractAllInstancesInLine(word: str, line: str, lineNum: int, vertical: bool
 
     #Branch based on if this line is vertical or horizontal and construct the results
     if vertical:
-        return [WordSearchResult(lowerWord.capitalize(), (lineNum, yy[0]), (lineNum, yy[1])) for yy in searchResults]
+        return [WordSearchResult(lowerWord.upper(), (lineNum, yy[0]), (lineNum, yy[1])) for yy in searchResults]
     else:
-        return [WordSearchResult(lowerWord.capitalize(), (xx[0], lineNum), (xx[1], lineNum)) for xx in searchResults]
+        return [WordSearchResult(lowerWord.upper(), (xx[0], lineNum), (xx[1], lineNum)) for xx in searchResults]
 
 """
 ########################################################################################################################
@@ -106,16 +106,23 @@ def runLoadedWordSearch(wordSearch: WordSearch) -> Dict[str, List[WordSearchResu
 ########################################################################################################################
 FUNCTION TO WRITE THE RESULTS OF OF THE WORD SEARCH PROCESS TO FILE
 """
-def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[str, List[WordSearchResult]]):
+def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[str, List[WordSearchResult]],
+                          showAll: bool = False):
     #Run through the words in the list, adding their results to the output content string
     outputContent: str = ""
 
     for word in wordList:
-        #Pull the content if it exists and convert to the output string
+        #Pull the content if it exists and convert to the output string.
+        # - Offset of 1 applied so that the top corner is coded as (1,1) rather than the python standard of (0,0)
         try:
-            currentResult = results[word][0].createOutputLine(1)
+            if showAll and len(results[word]) > 0:
+                currentResult = "\n".join([item.createOutputLine(1) for item in results[word]])
+            elif showAll:
+                currentResult = word + " not found"
+            else:
+                currentResult = results[word][0].createOutputLine(1)
         except (KeyError, IndexError):
-            currentResult = word.upper() + " not found"
+            currentResult = word + " not found"
 
         #Add the entry to the output string
         outputContent += currentResult + "\n"
