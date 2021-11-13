@@ -48,16 +48,15 @@ def extractAllInstancesInLine(word: str, line: str, lineNum: int, vertical: bool
     forwardResults: List[Tuple[int, int]] = findWordsInString(lowerWord, lowerLine)
     backwardResults: List[Tuple[int, int]] = findWordsInString(lowerWord[::-1], lowerLine)
 
-    #Reverse the backward result order and append the results together
-    searchResults: List[Tuple[int, int]] = [(ff[1], ff[0]) for ff in backwardResults]
-    searchResults.extend(forwardResults)
+    #Reverse the backward result order and append the results together, unless the word is a palindrome
+    if lowerWord in lowerWord[::-1]:
+        searchResults: List[Tuple[int, int]] = forwardResults
+    else:
+        searchResults: List[Tuple[int, int]] = [(ff[1], ff[0]) for ff in backwardResults]
+        searchResults.extend(forwardResults)
 
     #Branch based on if this line is vertical or horizontal and construct the results
-    results = []
     if vertical:
-        results = [WordSearchResult(lowerWord.capitalize(), (lineNum, yy[0]), (lineNum, yy[1])) for yy in searchResults]
+        return [WordSearchResult(lowerWord.capitalize(), (lineNum, yy[0]), (lineNum, yy[1])) for yy in searchResults]
     else:
-        results = [WordSearchResult(lowerWord.capitalize(), (xx[0], lineNum), (xx[1], lineNum)) for xx in searchResults]
-
-    #Return the results after ensuring uniqueness
-    return list(set(results))
+        return [WordSearchResult(lowerWord.capitalize(), (xx[0], lineNum), (xx[1], lineNum)) for xx in searchResults]

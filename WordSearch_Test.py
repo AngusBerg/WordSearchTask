@@ -70,6 +70,11 @@ class TestExtractAllInstancesInLine:
         testResult: List[WordSearchResult] = wsFunc.extractAllInstancesInLine("test", "testTESTtEsT", 0, False)
         assert len(testResult) == 3
 
+    #Test that the function does not return duplicate results when the word it is looking for is a palindrome
+    def test_palindromesArentRepeated(self):
+        testResult: List[WordSearchResult] = wsFunc.extractAllInstancesInLine("hannah", "hannahhannah", 0, False)
+        assert len(testResult) == 2
+
     #Test that the function will return an empty list when there are no matches for the word
     def test_noMatchesInLine(self):
         testResult: List[WordSearchResult] = wsFunc.extractAllInstancesInLine("unmatched", "<>?@#&!^#*!#)(", 0, False)
