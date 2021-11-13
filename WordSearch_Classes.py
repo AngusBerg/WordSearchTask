@@ -54,7 +54,12 @@ class WordSearch:
 
         for line in lines:
             #Drop the new line character from the line
-            lineWithoutBreak: str = line[:-1]
+            if len(line) == 0:
+                lineWithoutBreak: str = line
+            elif line[-1] in "\n":
+                lineWithoutBreak: str = line[:-1]
+            else:
+                lineWithoutBreak: str = line
 
             #Branch to the correct handling of the line
             if len(lineWithoutBreak) == 0:

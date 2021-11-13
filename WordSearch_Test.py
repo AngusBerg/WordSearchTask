@@ -56,6 +56,21 @@ class TestWordSearch:
 
         assert (correctWords and correctHoris and correctVerts)
 
+    #Test that the class throws the correct custom error when there is no content in the file
+    def test_noContentInTestFile(self):
+        with pytest.raises(InvalidWordSearchFile):
+            WordSearch("TestFiles/NoContent_TestSearch.txt")
+
+    #Test that the class throws the correct custom error when there are no words to look for in the file
+    def test_noSearchableWordsInTestFile(self):
+        with pytest.raises(InvalidWordSearchFile):
+            WordSearch("TestFiles/NoWords_TestSearch.txt")
+
+    #Test that the class throws the correct custom error when the lines of the Word Search are of different lengths
+    def test_linesOfVariedLengthsInTestFile(self):
+        with pytest.raises(InvalidWordSearchFile):
+            WordSearch("TestFiles/VariedLengths_TestSearch.txt")
+
 """
 #######################################################################################
 # FIND WORDS IN STRING FUNCTION TESTS
