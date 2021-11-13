@@ -118,7 +118,7 @@ def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[st
             currentResult = word.upper() + " not found"
 
         #Add the entry to the output string
-        outputContent += currentResult
+        outputContent += currentResult + "\n"
 
     #Check that the output path doesn't lead to a pre-existing file
     if Path(outputPath).is_file():

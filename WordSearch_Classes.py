@@ -31,7 +31,7 @@ class WordSearchResult:
 
     #Function to convert the contents of the results class into the output line for the results file
     def createOutputLine(self, offset: int = 0) -> str:
-        startPart = "(" + str(self.startX + offset) + ", " + str(self.startX + offset) + ")"
+        startPart = "(" + str(self.startX + offset) + ", " + str(self.startY + offset) + ")"
         endPart = "(" + str(self.endX + offset) + ", " + str(self.endY + offset) + ")"
         return self.word.upper() + " " + startPart + " " + endPart
 
