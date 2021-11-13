@@ -5,8 +5,8 @@
 # Date Created:     12/11/2021
 ########################################################################################################################
 """
-from typing import List, Tuple
-from WordSearch_Classes import WordSearchResult
+from typing import List, Tuple, Dict
+from WordSearch_Classes import WordSearchResult, WordSearch
 
 """
 ########################################################################################################################
@@ -81,6 +81,25 @@ def extractInstancesAcrossAllLines(word: str, horizontalLines: List[str], vertic
 
     #Return the full list of results that have been extracted
     return extractionResults
+
+"""
+########################################################################################################################
+FUNCTION TO EXTRACT ALL WORDS FROM A LOADED WORD SEARCH
+- wordSearch: The word search information that has been parsed out of the input file
+"""
+def runLoadedWordSearch(wordSearch: WordSearch) -> Dict[str, List[WordSearchResult]]:
+    #Declare the empty output dictionary
+    outputDict: Dict[str, List[WordSearchResult]] = dict()
+
+    #Perform the extraction for each of the words in the word-search. Add the entries as a new part of the dictionary
+    for searchWord in wordSearch.words:
+        results: List[WordSearchResult] = \
+            extractInstancesAcrossAllLines(searchWord, wordSearch.horizontalLines, wordSearch.verticalLines)
+
+        outputDict[searchWord] = results
+
+    #Return the dictionary with the relevant entries
+    return outputDict
 
 
 

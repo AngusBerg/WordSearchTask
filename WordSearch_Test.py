@@ -5,8 +5,9 @@
 # Date Created:     12/11/2021
 ########################################################################################################################
 """
+import os
 import pytest
-from typing import List
+from typing import List, Dict
 import WordSearch_Functions as wsFunc
 from WordSearch_Classes import WordSearchResult, WordSearch, InvalidWordSearchFile
 
@@ -188,6 +189,33 @@ class TestExtractInstancesAcrossAllLines:
 
         assert len(testResults) == 0
 
+"""
+#######################################################################################
+# RUN THE LOADED WORD SEARCH FUNCTION TESTS
+#######################################################################################
+"""
+class TestRunLoadedWordSearch:
+    #Full run test to check that this function runs correctly
+    def test_runFunctionWithDummyData(self):
+        #Define the test data
+        testLines: List[str] = ["dograndom", "odogplans", "godrandom"]
+        testWords: List[str] = ["dog", "random"]
+        testContent: str = "\n".join(testLines) + "\n\n" + "\n".join(testWords)
+
+        #Write the test data to a temp file
+        testPath: str = "TestFiles/currentTest_temporary.txt"
+        with open(testPath, "w") as file:
+            file.write(testContent)
+
+        #Read the data into the test instance and delete the temporary file
+        testInstance: WordSearch = WordSearch(testPath)
+        os.remove(testPath)
+
+        #Run the function
+        testResult: Dict[str, List[WordSearchResult]] = wsFunc.runLoadedWordSearch(testInstance)
+
+        #Check that the correct number of words were extracted
+        assert (len(testResult["dog"]) == 5 and len(testResult["random"]) == 2)
 
 
 

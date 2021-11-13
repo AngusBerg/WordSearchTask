@@ -37,7 +37,7 @@ class WordSearchResult:
 
 """
 #######################################################################
-# CLASS TO HOLD THE WORD SEARCH ITSELF
+# CLASS TO HOLD THE WORD SEARCH ITSELF. PARSES OUT FROM FILE
 #######################################################################
 """
 class WordSearch:
