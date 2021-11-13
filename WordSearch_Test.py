@@ -216,25 +216,3 @@ class TestRunLoadedWordSearch:
 
         #Check that the correct number of words were extracted
         assert (len(testResult["dog"]) == 5 and len(testResult["random"]) == 2)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

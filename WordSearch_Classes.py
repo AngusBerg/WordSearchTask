@@ -84,30 +84,3 @@ class WordSearch:
         self.words: List[str] = searchWords
         self.horizontalLines: List[str] = searchLines
         self.verticalLines: List[str] = ["".join(list(zz)) for zz in zip(*searchLines)]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

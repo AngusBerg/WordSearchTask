@@ -142,19 +142,3 @@ def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[st
 
     #Return from writing to file
     return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
