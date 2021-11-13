@@ -107,7 +107,7 @@ def runLoadedWordSearch(wordSearch: WordSearch) -> Dict[str, List[WordSearchResu
 FUNCTION TO WRITE THE RESULTS OF OF THE WORD SEARCH PROCESS TO FILE
 """
 def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[str, List[WordSearchResult]],
-                          showAll: bool = False):
+                          showAll: bool = False) -> str:
     #Run through the words in the list, adding their results to the output content string
     outputContent: str = ""
 
@@ -147,5 +147,5 @@ def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[st
     with open(outputPath, "w") as file:
         file.write(outputContent)
 
-    #Return from writing to file
-    return
+    #Return from writing to file; Return a message with the output path infixed
+    return "Results of word search written out. The output file is \"{}\"".format(outputPath)
