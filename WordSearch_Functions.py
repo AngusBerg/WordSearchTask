@@ -118,11 +118,11 @@ def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[st
             if showAll and len(results[word]) > 0:
                 currentResult = "\n".join([item.createOutputLine(1) for item in results[word]])
             elif showAll:
-                currentResult = word + " not found"
+                currentResult = word.upper() + " not found"
             else:
                 currentResult = results[word][0].createOutputLine(1)
         except (KeyError, IndexError):
-            currentResult = word + " not found"
+            currentResult = word.upper() + " not found"
 
         #Add the entry to the output string
         outputContent += currentResult + "\n"
