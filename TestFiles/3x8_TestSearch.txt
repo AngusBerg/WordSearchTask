@@ -1,0 +1,6 @@
+testTEST
+radicals
+testVALS
+
+test
+radicals

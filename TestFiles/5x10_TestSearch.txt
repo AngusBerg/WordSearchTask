@@ -1,0 +1,11 @@
+basicTESTS
+resultHERE
+cdtTESTcdt
+aoaTESTaoa
+tggTESTtgg
+
+test
+here
+cat
+dog
+tag
