@@ -9,7 +9,7 @@ import sys
 from typing import List
 from pathlib import Path
 from WordSearch_Classes import WordSearch
-from WordSearch_Functions import runLoadedWordSearch, writeTheResultsToFile
+from WordSearch_Functions import runLoadedWordSearch, writeTheResultsToFile, determineOutputPath
 
 #Pull the system arguments as a global. Skip the first which is the script name
 wordSearchPath: List[str] = sys.argv[1:]
@@ -26,7 +26,7 @@ def wordSearchMain(inputPath: str, fullResultsFlag: bool = False):
     wordSearchResults = runLoadedWordSearch(wordSearchInfo)
 
     #Create the output file path
-    outPath: str = ".".join(inputPath.split(".")[:-1]) + ".out"
+    outPath: str = determineOutputPath(inputPath)
 
     #Write the results to file, print the success message and return
     print(writeTheResultsToFile(wordSearchInfo.words, outPath, wordSearchResults, fullResultsFlag))

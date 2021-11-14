@@ -5,6 +5,7 @@
 # Date Created:     12/11/2021
 ########################################################################################################################
 """
+import os
 from pathlib import Path
 from typing import List, Tuple, Dict
 from WordSearch_Classes import WordSearchResult, WordSearch
@@ -104,6 +105,47 @@ def runLoadedWordSearch(wordSearch: WordSearch) -> Dict[str, List[WordSearchResu
 
 """
 ########################################################################################################################
+FUNCTION TO DETERMINE WHAT THE OUTPUT FILE PATH SHOULD BE BASED ON THE INPUT FILE PATH
+"""
+def determineOutputPath(inputPath: str) -> str:
+    #Determine which character is being used to split directories in the current file system
+    breakChar: str = "\\" if "\\" in os.getcwd() else "/"
+
+    #Pull the target folder and file name out of the input path
+    pathParts: List[str] = inputPath.split(breakChar)
+    dirParts: List[str] = pathParts[:-1]
+    inputFile: str = pathParts[-1]
+
+    #Update the input file and append to the directory parts. Branch to account for files with no file type extension
+    if "." in inputFile:
+        dirParts.append(".".join(inputFile.split(".")[:-1]) + ".out")
+    else:
+        dirParts.append(inputFile + ".out")
+
+    #Join the path parts together
+    outputPath: str = breakChar.join(dirParts)
+
+    #Check that this file doesn't already exist. Append on an offset number if it does
+    if Path(outputPath).is_file():
+        #Add an offset to ensure that the file path isn't filled
+        count: int = 1
+
+        while True:
+            pathParts: List[str] = outputPath.split(".")
+            offsetPath: str = ".".join(pathParts[:-1]) + "_" + str(count) + "." + pathParts[-1]
+
+            #See if the offset path is unique. If not, increment the count and loop
+            if Path(offsetPath).is_file():
+                count += 1
+            else:
+                outputPath = offsetPath
+                break
+
+    #Return the derived output path
+    return outputPath
+
+"""
+########################################################################################################################
 FUNCTION TO WRITE THE RESULTS OF OF THE WORD SEARCH PROCESS TO FILE
 """
 def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[str, List[WordSearchResult]],
@@ -126,22 +168,6 @@ def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[st
 
         #Add the entry to the output string
         outputContent += currentResult + "\n"
-
-    #Check that the output path doesn't lead to a pre-existing file
-    if Path(outputPath).is_file():
-        #Add an offset to ensure that the file path isn't filled
-        count: int = 1
-
-        while True:
-            pathParts: List[str] = outputPath.split(".")
-            offsetPath: str = ".".join(pathParts[:-1]) + "_" + str(count) + "." + pathParts[-1]
-
-            #See if the offset path is unique. If not, increment the count and loop
-            if Path(offsetPath).is_file():
-                count += 1
-            else:
-                outputPath = offsetPath
-                break
 
     #Write the information out to file
     with open(outputPath, "w") as file:

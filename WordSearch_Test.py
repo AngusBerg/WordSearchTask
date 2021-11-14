@@ -41,7 +41,7 @@ class TestWordSearch:
     def test_readSmallTestFile(self):
         testSearch: WordSearch = WordSearch("TestFiles/3x8_TestSearch.txt")
 
-        correctWords: bool = (len(testSearch.words) == 2)
+        correctWords: bool = (len(testSearch.words) == 3)
         correctHoris: bool = (len(testSearch.horizontalLines) == 3 and len(testSearch.horizontalLines[0]) == 8)
         correctVerts: bool = (len(testSearch.verticalLines) == 8 and len(testSearch.verticalLines[0]) == 3)
 
@@ -51,7 +51,7 @@ class TestWordSearch:
     def test_readLargeTestFile(self):
         testSearch: WordSearch = WordSearch("TestFiles/5x10_TestSearch.txt")
 
-        correctWords: bool = (len(testSearch.words) == 5)
+        correctWords: bool = (len(testSearch.words) == 6)
         correctHoris: bool = (len(testSearch.horizontalLines) == 5 and len(testSearch.horizontalLines[0]) == 10)
         correctVerts: bool = (len(testSearch.verticalLines) == 10 and len(testSearch.verticalLines[0]) == 5)
 
@@ -216,3 +216,29 @@ class TestRunLoadedWordSearch:
 
         #Check that the correct number of words were extracted
         assert (len(testResult["dog"]) == 5 and len(testResult["random"]) == 2)
+
+"""
+#######################################################################################
+# DETERMINE OUTPUT PATH FROM INPUT PATH FUNCTION TESTS
+#######################################################################################
+"""
+class TestDetermineOutputPath:
+    #Check that the function can correctly retype a path without a directory
+    def test_retypesFileInCWD(self):
+        testResult = wsFunc.determineOutputPath("TestPath.txt")
+        assert "TestPath.out" in testResult
+
+    #Check that the function correctly adds a type to a file without one
+    def test_typesUntypedFileInCWD(self):
+        testResult = wsFunc.determineOutputPath("TestPath")
+        assert "TestPath.out" in testResult
+
+    #Check that the function maintains the directory of the input file if the input is in a child folder
+    def test_retypesFileInChild(self):
+        testResult = wsFunc.determineOutputPath("Folder1\\Folder2\\TestPath.txt")
+        assert "Folder1\\Folder2\\TestPath.out" in testResult
+
+    #Check that the function maintains the directory of the input file if the input is in a parent folder
+    def test_retypesFileInParent(self):
+        testResult = wsFunc.determineOutputPath("../TestPath.txt")
+        assert "../TestPath.out" in testResult
