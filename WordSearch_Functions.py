@@ -13,10 +13,16 @@ from WordSearch_Classes import WordSearchResult, WordSearch
 """
 ########################################################################################################################
 FUNCTION TO FIND INSTANCES OF A WORD IN A STRING
-- word: The word to be found in the source string
-- source: The source string that will be search
 """
 def findWordsInString(word: str, source: str) -> List[Tuple[int, int]]:
+    """
+    FUNCTION TO FIND INSTANCES OF A WORD IN A STRING
+
+    :param word: The word to be found in the source string
+    :param source: The source string that will be search
+    :return: A list of "(start, end)" index tuples showing where in the source the word was found
+    """
+
     #Initialise the tracking index and output list
     currentStart: int = 0
     outputList: List[Tuple[int, int]] = []
@@ -36,12 +42,19 @@ def findWordsInString(word: str, source: str) -> List[Tuple[int, int]]:
 """
 ########################################################################################################################
 FUNCTION TO FIND FORWARD AND BACKWARD INSTANCES OF A WORD IN A LONGER STRING AND RETURN A LIST OF THE RESULTS CLASS
-- word: The word to be found in the source string
-- line: The full line of the word search that is being examined
-- lineNum: The index of the line that is being examined
-- vertical: A boolean telling the function whether or not the line being examined is vertical. False means horizontal
 """
 def extractAllInstancesInLine(word: str, line: str, lineNum: int, vertical: bool = False) -> List[WordSearchResult]:
+    """
+    FUNCTION TO FIND FORWARD AND BACKWARD INSTANCES OF A WORD IN A LONGER STRING
+
+    :param word: The word to be found in the source string
+    :param line: The full line of the word search that is being examined
+    :param lineNum: The index of the line that is being examined
+    :param vertical: A boolean telling the function whether or not the line being examined is vertical.
+                     False means that the line is a horizontal row.
+    :return: A list of the "WordSearchResults" class containing every instance of the word that was found.
+    """
+
     #Convert the word and line to all lower-case
     lowerWord: str = word.lower()
     lowerLine: str = line.lower()
@@ -66,12 +79,18 @@ def extractAllInstancesInLine(word: str, line: str, lineNum: int, vertical: bool
 """
 ########################################################################################################################
 FUNCTION TO FIND ALL THE INSTANCES OF A WORD ON ALL LINES AND RETURN THE LIST OF RESULTS
-- word: The word that will be searched for in the lines
-- horizontalLines: The set of horizontal lines that will be searched for instances of the word
-- verticalLines: The set of vertical lines that will be searched for instances of the word
 """
 def extractInstancesAcrossAllLines(word: str, horizontalLines: List[str], verticalLines: List[str]) \
         -> List[WordSearchResult]:
+    """
+    FUNCTION TO FIND ALL THE INSTANCES OF A WORD ON ALL LINES AND RETURN THE LIST OF RESULTS
+
+    :param word: The word that will be searched for in the lines
+    :param horizontalLines: The set of horizontal lines that will be searched for instances of the word
+    :param verticalLines: The set of vertical lines that will be searched for instances of the word
+    :return: A list of the "WordSearchResults" class containing every instance of the word that was found.
+    """
+
     #Get the results for the horizontal lines
     extractionResults: List[WordSearchResult] = []
     for index, line in enumerate(horizontalLines):
@@ -87,9 +106,16 @@ def extractInstancesAcrossAllLines(word: str, horizontalLines: List[str], vertic
 """
 ########################################################################################################################
 FUNCTION TO EXTRACT ALL WORDS FROM A LOADED WORD SEARCH
-- wordSearch: The word search information that has been parsed out of the input file
 """
 def runLoadedWordSearch(wordSearch: WordSearch) -> Dict[str, List[WordSearchResult]]:
+    """
+    FUNCTION TO EXTRACT ALL WORDS FROM A LOADED WORD SEARCH
+
+    :param wordSearch: The word search information that has been loaded into the required class
+    :return: A dictionary, keyed by the words that were searched for in the grid and containing each of their list of
+             "WordSearchResult" objects.
+    """
+
     #Declare the empty output dictionary
     outputDict: Dict[str, List[WordSearchResult]] = dict()
 
@@ -108,6 +134,13 @@ def runLoadedWordSearch(wordSearch: WordSearch) -> Dict[str, List[WordSearchResu
 FUNCTION TO DETERMINE WHAT THE OUTPUT FILE PATH SHOULD BE BASED ON THE INPUT FILE PATH
 """
 def determineOutputPath(inputPath: str) -> str:
+    """
+    FUNCTION TO DETERMINE WHAT THE OUTPUT FILE PATH SHOULD BE BASED ON THE INPUT FILE PATH
+
+    :param inputPath: The input file path for this project run
+    :return: A valid but currently unused output file path in the same directory as the input
+    """
+
     #Determine which character is being used to split directories in the current file system
     breakChar: str = "\\" if "\\" in os.getcwd() else "/"
 
@@ -150,6 +183,18 @@ FUNCTION TO WRITE THE RESULTS OF OF THE WORD SEARCH PROCESS TO FILE
 """
 def writeTheResultsToFile(wordList: List[str], outputPath: str, results: Dict[str, List[WordSearchResult]],
                           showAll: bool = False) -> str:
+    """
+    FUNCTION TO WRITE THE RESULTS OF OF THE WORD SEARCH PROCESS TO FILE
+
+    :param wordList: The list of words that were searched for in the word search
+    :param outputPath: The output path that the results are to be written to
+    :param results: The word-keyed dictionary containing the results of the word search
+    :param showAll: A boolean indicating whether the top result for each word or all the results for each word should
+                    be written out to file.
+    :return: A message string confirming that the results were written to file and the file path to which they were
+             written.
+    """
+
     #Run through the words in the list, adding their results to the output content string
     outputContent: str = ""
 

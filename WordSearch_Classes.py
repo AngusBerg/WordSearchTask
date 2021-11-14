@@ -23,6 +23,14 @@ class InvalidWordSearchFile(Exception):
 class WordSearchResult:
     #Initialisation function for the results class
     def __init__(self, word: str, startPosition: Tuple[int, int], endPosition: Tuple[int, int]):
+        """
+        CLASS TO HOLD THE RESULT OF A SUCCESSFUL WORD SEARCH
+
+        :param word: The word that is found between the provided coordinates
+        :param startPosition: A tuple of ints containing the (X, Y) position of the first letter of the word
+        :param endPosition: A tuple of ints containing the (X, Y) position of the last letter of the word
+        """
+
         self.word: str = word
         self.startX: int = startPosition[0]
         self.startY: int = startPosition[1]
@@ -31,6 +39,14 @@ class WordSearchResult:
 
     #Function to convert the contents of the results class into the output line for the results file
     def createOutputLine(self, offset: int = 0) -> str:
+        """
+        METHOD TO GENERATE A LINE OF THE OUTPUT FROM THE WORD SEARCH RESULT IN THIS INSTANCE
+
+        :param offset: An optional number by which to offset the coordinates
+        :return: A string starting with the word and followed by the start and end coordinates in string
+                 representations of tuples.
+        """
+
         startPart = "(" + str(self.startX + offset) + ", " + str(self.startY + offset) + ")"
         endPart = "(" + str(self.endX + offset) + ", " + str(self.endY + offset) + ")"
         return self.word + " " + startPart + " " + endPart
@@ -43,6 +59,12 @@ class WordSearchResult:
 class WordSearch:
     #Initialisation function to build the word search from the input class
     def __init__(self, path: str):
+        """
+        CLASS TO HOLD A WORD SEARCH AS EXTRACTED FROM INPUT FILE
+
+        :param path: The path to the text or text-like file that contains the word search
+        """
+
         #Initialise the tracking variables
         breakLineFound: bool = False
         searchLines: List[str] = []

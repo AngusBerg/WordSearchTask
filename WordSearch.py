@@ -19,6 +19,14 @@ wordSearchPath: List[str] = sys.argv[1:]
 MAIN FUNCTION FOR THE WORD SEARCH PROGRAM
 """
 def wordSearchMain(inputPath: str, fullResultsFlag: bool = False):
+    """
+    MAIN FUNCTION FOR THE WORD SEARCH PROGRAM
+
+    :param inputPath: The path, either relative to the CWD or absolute, to the file containing the word search.
+    :param fullResultsFlag: A boolean that, when True, tells the program to output every result it finds rather than
+                            just the top result for each word.
+    :return: No return, but results written to file in the same directory as the input path.
+    """
     #Read the file information into a word search class
     wordSearchInfo: WordSearch = WordSearch(inputPath)
 
@@ -32,7 +40,10 @@ def wordSearchMain(inputPath: str, fullResultsFlag: bool = False):
     print(writeTheResultsToFile(wordSearchInfo.words, outPath, wordSearchResults, fullResultsFlag))
     return
 
-#Run the process from here if this is the main
+"""
+########################################################################################################################
+Run the process from here if this is the main
+"""
 if __name__ == '__main__':
     #Run for every arg that is a valid input
     for index, strArg in enumerate(wordSearchPath):
