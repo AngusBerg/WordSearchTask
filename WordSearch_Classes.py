@@ -76,9 +76,9 @@ class WordSearch:
         if len(searchLines) == 0:
             raise InvalidWordSearchFile("There was no content to be read from the provided input file")
         elif len(searchWords) == 0:
-            raise InvalidWordSearchFile("No words could be found in the file after the Word Search was extracted")
+            raise InvalidWordSearchFile("No words could be found in the file after the Word Search Grid was extracted")
         elif len(set([len(line) for line in searchLines])) != 1:
-            raise InvalidWordSearchFile("The lines of the word search provided are not all the same length")
+            raise InvalidWordSearchFile("The lines of the Word Search Grid provided are not all the same length")
 
         #Declare the needed values for this class, creating the vertical lines by zipping the horizontal lines
         self.words: List[str] = searchWords
