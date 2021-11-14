@@ -48,3 +48,8 @@ if __name__ == '__main__':
 
             #Run the program
             wordSearchMain(strArg, fullResults)
+
+        elif not ("true" in strArg.lower() or "false" in strArg.lower()):
+            #The argument that has been input is not a valid file and it is not a secondary boolean argument;
+            # - Alert the user that this argument could not be parsed
+            print("WARN: The input argument \"{}\" was not a valid file, and as such was not processed.".format(strArg))
